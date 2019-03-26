@@ -21,37 +21,23 @@ Route::get('/', function () {
 
 Route::view('about', 'about');
 
-Route::get('contact', function () {
+Route::get('contact', 'ContactController@index')->name('contact');
 
-    $name = 'Ignas Lunenas';
-    $email = 'hey@ignart.lt';
-    $phone = '+37060455792';
+//Route::resource('posts', 'PostController');
 
-    // masyvas ⬇️
-
-    $interests = [
-
-        'Kava',
-        'Kompas',
-        'Kodas',
-        'Dar kazkas'
-
-    ];
-
-    $data = compact('name', 'email' ,'phone', 'interests');
-
-    return view('contact', $data);
+Route::get('posts', 'PostController@index')->name('posts.index');
+Route::get('posts/create', 'PostController@create')->name('posts.create');
+Route::get('posts/{id}', 'PostController@show')->name('posts.show');
 
 
-});
-
-Route::get('blog' , function () {
-
-    $title = 'Blogo pavadinimas';
-    $date = '2019-03-26';
-    $content = 'This is my first blog post, lets go!';
-
-    $blogpost = compact('title', 'date', 'content');
-
-    return view('blog' , $blogpost );
-});
+//Route::get('blog' , function () {
+//
+//    $title = 'Blogo pavadinimas';
+//    $date = '2019-03-26';
+//    $content = 'This is my first blog post, lets go!';
+//
+//    $blogpost = compact('title', 'date', 'content');
+//
+//    return view('blog' , $blogpost );
+//
+//});

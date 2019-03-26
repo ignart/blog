@@ -1,23 +1,20 @@
 @extends('layouts.app')
 
-@section('title','Create new')
+@section('title',' Blog post title')
 
 @section('content')
 
-
-    <div class="container">
+    <div class="container mt-5">
 
         <div class="row">
 
             <div class="col">
-
-                <h1>This is welcome page</h1>
-
+                <h1>{{ $id }}</h1>
             </div>
 
         </div>
 
-    </div>
 
+    </div>
 
 @endsection
