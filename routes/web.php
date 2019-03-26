@@ -44,3 +44,14 @@ Route::get('contact', function () {
 
 
 });
+
+Route::get('blog' , function () {
+
+    $title = 'Blogo pavadinimas';
+    $date = '2019-03-26';
+    $content = 'This is my first blog post, lets go!';
+
+    $blogpost = compact('title', 'date', 'content');
+
+    return view('blog' , $blogpost );
+});
