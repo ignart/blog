@@ -29,13 +29,17 @@
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    MailerLite
-                </div>
+            <div class="container text-center mt-5">
+                <h1>
+                    Laravel training blog
+                </h1>
 
                 <div class="links">
                     <a href="/about">About</a>
+                    -
+                    <a href="/blog">Blog</a>
+                    -
+                    <a href="/contact">Contact</a>
                 </div>
             </div>
         </div>

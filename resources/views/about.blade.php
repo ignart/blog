@@ -1,7 +1,10 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="container text-center mt-5">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -17,7 +20,9 @@
             @endif
 
 
-            <h1>About</h1>
+            <h1 class="text-muted">Coming soon</h1>
+
+            <a href="/">Go back</a>
 
 
         </div>

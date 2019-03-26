@@ -1,3 +1,6 @@
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
 <h1>Profile</h1>
 
 <ul>
