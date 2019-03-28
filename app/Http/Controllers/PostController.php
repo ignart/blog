@@ -28,6 +28,13 @@ class PostController extends Controller
                 'time' => '2019-03-26',
                 'content' => 'Tesktas here',
 
+            ],
+            [
+
+                'title' => 'testas',
+                'time' => '2019-03-26',
+                'content' => 'Tesktas here',
+
             ]
 
         ];
