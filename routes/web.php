@@ -15,29 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('about', function () {
-//    return view('about');
-//});
-
 Route::view('about', 'about');
 
 Route::get('contact', 'ContactController@index')->name('contact');
-
-//Route::resource('posts', 'PostController');
 
 Route::get('posts', 'PostController@index')->name('posts.index');
 Route::get('posts/create', 'PostController@create')->name('posts.create');
 Route::get('posts/{id}', 'PostController@show')->name('posts.show');
 
+Route::get('file', 'FileController@index')->name('file.index');
+Route::get('file/create', 'FileController@create')->name('file.create');
+Route::get('file/{id}', 'FileController@show')->name('file.show');
 
-//Route::get('blog' , function () {
-//
-//    $title = 'Blogo pavadinimas';
-//    $date = '2019-03-26';
-//    $content = 'This is my first blog post, lets go!';
-//
-//    $blogpost = compact('title', 'date', 'content');
-//
-//    return view('blog' , $blogpost );
-//
-//});
