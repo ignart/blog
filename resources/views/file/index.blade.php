@@ -35,7 +35,7 @@
 
             <div class="col-12">
 
-                <strong>Number of files:</strong> <span class="text-muted">{{ count($files) }}</span>
+                <strong>Numero of files:</strong> <span class="text-muted">{{ count($files) }}</span>
 
             </div>
 
