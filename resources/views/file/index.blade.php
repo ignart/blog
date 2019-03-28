@@ -6,6 +6,13 @@
 
         <div class="row">
 
+            <div class="col-12 d-flex justify-content-between align-items-center mb-4">
+
+                <h1 class="mb-0">Files</h1>
+                <span><strong>Number of files:</strong> <span class="text-muted">{{ count($files) }}</span></span>
+
+            </div>
+
         @forelse($files as $file)
 
         <div class="{{ $loop->first ? 'col-lg-12' : 'col-lg-3 ' }} mb-4">
@@ -32,12 +39,6 @@
         @empty
 
         @endforelse
-
-            <div class="col-12">
-
-                <strong>Numero of files:</strong> <span class="text-muted">{{ count($files) }}</span>
-
-            </div>
 
         </div>
 
