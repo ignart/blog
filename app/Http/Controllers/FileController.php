@@ -31,6 +31,48 @@ class FileController extends Controller
                 'created_at' => '2019-03-26',
 
             ],
+            [
+
+                'filename' => 'name-2.jpg',
+                'size' => '5MB',
+                'created_at' => '2019-03-26',
+
+            ],
+            [
+
+                'filename' => 'name-2.jpg',
+                'size' => '5MB',
+                'created_at' => '2019-03-26',
+
+            ],
+            [
+
+                'filename' => 'name-2.jpg',
+                'size' => '5MB',
+                'created_at' => '2019-03-26',
+
+            ],
+            [
+
+                'filename' => 'name-2.jpg',
+                'size' => '5MB',
+                'created_at' => '2019-03-26',
+
+            ],
+            [
+
+                'filename' => 'name-2.jpg',
+                'size' => '5MB',
+                'created_at' => '2019-03-26',
+
+            ],
+            [
+
+                'filename' => 'name-2.jpg',
+                'size' => '5MB',
+                'created_at' => '2019-03-26',
+
+            ],
 
         ];
 
