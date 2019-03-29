@@ -26,4 +26,4 @@ Route::get('posts/{id}', 'PostController@show')->name('posts.show');
 Route::get('file', 'FileController@index')->name('file.index');
 Route::get('file/create', 'FileController@create')->name('file.create');
 Route::get('file/{id}', 'FileController@show')->name('file.show');
-
+Route::post('posts', 'PostController@store')->name('posts.store');

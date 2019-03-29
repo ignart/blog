@@ -6,14 +6,7 @@
 
     <div class="container mt-5">
 
-        <div class="row">
-
-            <div class="col">
-                <h1>{{ $id }}</h1>
-            </div>
-
-        </div>
-
+        @include('posts.card', ['posts' => $post])
 
     </div>
 

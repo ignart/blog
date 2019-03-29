@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -13,31 +14,33 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = [
+//        $posts = collect([
+//
+//            [
+//
+//                'title' => 'Šiandien sninga',
+//                'time' => '2019-03-25',
+//                'content' => 'Tesktas here',
+//
+//            ],
+//            [
+//
+//                'title' => 'Saulė šviečia',
+//                'time' => '2019-03-26',
+//                'content' => 'Tesktas here',
+//
+//            ],
+//            [
+//
+//                'title' => 'testas',
+//                'time' => '2019-03-26',
+//                'content' => 'Tesktas here',
+//
+//            ]
+//
+//        ]);
 
-            [
-
-                'title' => 'Šiandien sninga',
-                'time' => '2019-03-25',
-                'content' => 'Tesktas here',
-
-            ],
-            [
-
-                'title' => 'Saulė šviečia',
-                'time' => '2019-03-26',
-                'content' => 'Tesktas here',
-
-            ],
-            [
-
-                'title' => 'testas',
-                'time' => '2019-03-26',
-                'content' => 'Tesktas here',
-
-            ]
-
-        ];
+        $posts = DB::table('posts')->get();
 
         return view('posts.index',compact('posts'));
     }
@@ -60,7 +63,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('posts')->insert([
+            'name' => $request->input('name'),
+            'content' => $request->input('content')
+        ]);
+
+        return redirect(route('posts.index'));
+
     }
 
     /**
@@ -71,7 +80,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return view('posts.show', compact('id'));
+        $post = DB::table('posts')->where('id', $id)->first();
+
+        return view('posts.show', compact('post'));
     }
 
     /**
