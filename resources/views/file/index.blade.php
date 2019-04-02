@@ -10,6 +10,8 @@
 
                 <h1 class="mb-0">Files</h1>
 
+                <a class="btn btn-secondary" href="{{ route('file.create') }}">Add new file</a>
+
             </div>
 
         </div>
