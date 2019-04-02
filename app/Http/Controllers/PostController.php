@@ -63,12 +63,27 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+        //atlikti validacija
+
+        $request->validate([
+            'name' => 'required|min:5',
+            'content' => 'required|min:10'
+        ]);
+
+        // jeigu validacija sėkminga, išsaugau įrašą
+
         DB::table('posts')->insert([
             'name' => $request->input('name'),
             'content' => $request->input('content')
         ]);
 
-        return redirect(route('posts.index'));
+
+        // darau redirectą po išsaugojimo
+
+        $message = 'Įrašas sėkmingai sukurtas!';
+
+        return redirect()->route('posts.index')->with('message', $message);
 
     }
 
@@ -93,7 +108,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $post = DB::table('posts')->where('id', $id)->first();
+
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -105,7 +123,26 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //atlikti validacija
+
+        $request->validate([
+            'name' => 'required|min:5',
+            'content' => 'required|min:10'
+        ]);
+
+        // jeigu validacija sėkminga, išsaugau įrašą
+
+        DB::table('posts')->where('id', $id)->update([
+            'name' => $request->input('name'),
+            'content' => $request->input('content')
+        ]);
+
+
+        // darau redirectą po išsaugojimo
+
+        $message = 'Įrašas sėkmingai atnaujintas!';
+
+        return redirect()->route('posts.show', ['id' => $id])->with('message', $message);
     }
 
     /**
@@ -116,6 +153,11 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('posts')->delete($id);
+
+        $message = 'Įrašas sėkmingai ištrintas!';
+
+        return redirect()->route('posts.index')->with('message', $message);
+
     }
 }

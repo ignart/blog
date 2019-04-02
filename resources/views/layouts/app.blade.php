@@ -17,6 +17,50 @@
 
             @include('partials.nav')
 
+            @if (session('message'))
+
+            <div class="container">
+
+                <div class="row">
+                    <div class="col mb-3">
+                        @component('components.alert', ['type' => 'alert-success'])
+                            @slot('title')
+                                Success
+                            @endslot
+
+                            {{ session('message') }}
+
+                        @endcomponent
+                    </div>
+                </div>
+
+            </div>
+
+            @endif
+
+            @if ($errors->any())
+                <div class="container">
+                    <div class="row">
+                        <div class="col mb-3">
+                            @component('components.alert', ['type' => 'alert-danger'])
+                                @slot('title')
+                                    Erroras
+                                @endslot
+
+                                {{--<ul>--}}
+                                {{--@foreach($errors->all() as $error)--}}
+                                {{--<li>{{ $error }}</li>--}}
+                                {{--@endforeach--}}
+                                {{--</ul>--}}
+
+                                Oj kaip errorina
+
+                            @endcomponent
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             @yield('content')
 
             @include('partials.footer')
