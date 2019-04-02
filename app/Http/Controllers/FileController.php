@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FileController extends Controller
 {
@@ -14,67 +15,7 @@ class FileController extends Controller
     public function index()
     {
 
-        $files = [
-
-            [
-
-                'filename' => 'name.jpg',
-                'size' => '2MB',
-                'created_at' => '2019-03-26',
-
-            ],
-
-            [
-
-                'filename' => 'name-2.jpg',
-                'size' => '5MB',
-                'created_at' => '2019-03-26',
-
-            ],
-            [
-
-                'filename' => 'name-2.jpg',
-                'size' => '5MB',
-                'created_at' => '2019-03-26',
-
-            ],
-            [
-
-                'filename' => 'name-2.jpg',
-                'size' => '5MB',
-                'created_at' => '2019-03-26',
-
-            ],
-            [
-
-                'filename' => 'name-2.jpg',
-                'size' => '5MB',
-                'created_at' => '2019-03-26',
-
-            ],
-            [
-
-                'filename' => 'name-2.jpg',
-                'size' => '5MB',
-                'created_at' => '2019-03-26',
-
-            ],
-            [
-
-                'filename' => 'name-2.jpg',
-                'size' => '5MB',
-                'created_at' => '2019-03-26',
-
-            ],
-            [
-
-                'filename' => 'name-2.jpg',
-                'size' => '5MB',
-                'created_at' => '2019-03-26',
-
-            ],
-
-        ];
+        $files = DB::table('files')->get();
 
         return view('file.index',compact('files'));
     }
@@ -97,7 +38,13 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('files')->insert([
+            'file_name' => $request->input('file_name'),
+            'file_size' => $request->input('file_size')
+        ]);
+
+         return redirect(route('file.index'));
+
     }
 
     /**
@@ -108,6 +55,8 @@ class FileController extends Controller
      */
     public function show($id)
     {
+        $file = DB::table('files')->where('id', $id)->first();
+
         return view('file.show', compact('id'));
     }
 

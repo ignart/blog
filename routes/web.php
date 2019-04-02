@@ -22,8 +22,10 @@ Route::get('contact', 'ContactController@index')->name('contact');
 Route::get('posts', 'PostController@index')->name('posts.index');
 Route::get('posts/create', 'PostController@create')->name('posts.create');
 Route::get('posts/{id}', 'PostController@show')->name('posts.show');
+Route::post('posts', 'PostController@store')->name('posts.store');
 
 Route::get('file', 'FileController@index')->name('file.index');
 Route::get('file/create', 'FileController@create')->name('file.create');
 Route::get('file/{id}', 'FileController@show')->name('file.show');
-Route::post('posts', 'PostController@store')->name('posts.store');
+Route::post('file', 'FileController@store')->name('file.store');
+
