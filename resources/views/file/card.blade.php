@@ -4,7 +4,7 @@
 
         <div class="card-header d-flex flex-column h-100 justify-content-center">
 
-            <h5 class="mb-0">{{ $file->file_name }}</h5>
+           <a href="{{ route('file.show', ['id' => $file->id]) }}"><h5 class="mb-0">{{ $file->file_name }}</h5></a>
 
 
         </div>

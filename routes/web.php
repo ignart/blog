@@ -31,4 +31,5 @@ Route::get('file', 'FileController@index')->name('file.index');
 Route::get('file/create', 'FileController@create')->name('file.create');
 Route::get('file/{id}', 'FileController@show')->name('file.show');
 Route::post('file', 'FileController@store')->name('file.store');
+Route::delete('file/{id}', 'FileController@destroy')->name('file.destroy');
 

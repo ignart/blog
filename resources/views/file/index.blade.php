@@ -16,6 +16,23 @@
 
         </div>
 
+        @if (session('message'))
+
+        <div class="row">
+            <div class="col mb-3">
+                @component('components.alert', ['type' => 'alert-success'])
+                    @slot('title')
+                        Success
+                    @endslot
+
+                    {{ session('message') }}
+
+                @endcomponent
+            </div>
+        </div>
+
+        @endif
+
         <div class="row">
 
             @each('file.card', $files, 'file', 'file.no-records')

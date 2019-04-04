@@ -38,12 +38,20 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'file_name' => 'required',
+            'file_size' => 'required'
+        ]);
+
         DB::table('files')->insert([
             'file_name' => $request->input('file_name'),
             'file_size' => $request->input('file_size')
         ]);
 
-         return redirect(route('file.index'));
+        $message = 'Failas pridėtas';
+
+        return redirect()->route('file.index')->with('message', $message);
 
     }
 
@@ -57,7 +65,7 @@ class FileController extends Controller
     {
         $file = DB::table('files')->where('id', $id)->first();
 
-        return view('file.show', compact('id'));
+        return view('file.show', compact('file'));
     }
 
     /**
@@ -91,6 +99,10 @@ class FileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('files')->delete($id);
+
+        $message = 'Failas ištrintas';
+
+        return redirect()->route('file.index')->with('message', $message);
     }
 }
