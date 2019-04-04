@@ -33,3 +33,9 @@ Route::get('file/{id}', 'FileController@show')->name('file.show');
 Route::post('file', 'FileController@store')->name('file.store');
 Route::delete('file/{id}', 'FileController@destroy')->name('file.destroy');
 
+Route::resource('comments', 'CommentController');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

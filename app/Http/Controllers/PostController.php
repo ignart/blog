@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -40,7 +41,9 @@ class PostController extends Controller
 //
 //        ]);
 
-        $posts = DB::table('posts')->get();
+//        $posts = DB::table('posts')->get();
+
+        $posts = \App\Post::all();
 
         return view('posts.index',compact('posts'));
     }
@@ -52,7 +55,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $post = new \App\Post;
+
+        return view('posts.create', compact('post'));
     }
 
     /**
@@ -61,23 +66,28 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\PostRequest $request)
     {
 
         //atlikti validacija
 
-        $request->validate([
-            'name' => 'required|min:5',
-            'content' => 'required|min:10'
-        ]);
+//        $request->validate([
+//            'name' => 'required|min:5',
+//            'content' => 'required|min:10'
+//        ]);
 
         // jeigu validacija sėkminga, išsaugau įrašą
 
-        DB::table('posts')->insert([
-            'name' => $request->input('name'),
-            'content' => $request->input('content')
-        ]);
+//        DB::table('posts')->insert([
+//            'name' => $request->input('name'),
+//            'content' => $request->input('content'),
+//            'created_at' => Carbon::now()
+//        ]);
 
+        $post = new \App\Post;
+        $post->name = $request->input('name');
+        $post->content = $request->input('content');
+        $post->save();
 
         // darau redirectą po išsaugojimo
 
@@ -95,7 +105,14 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = DB::table('posts')->where('id', $id)->first();
+
+//        Iš DB pagauna
+
+//        $post = DB::table('posts')->where('id', $id)->first();
+
+//        Iš modelio pagauna
+
+        $post = \App\Post::findOrFail($id);
 
         return view('posts.show', compact('post'));
     }
@@ -109,7 +126,9 @@ class PostController extends Controller
     public function edit($id)
     {
 
-        $post = DB::table('posts')->where('id', $id)->first();
+//        $post = DB::table('posts')->where('id', $id)->first();
+
+        $post = \App\Post::find($id);
 
         return view('posts.edit', compact('post'));
     }
@@ -121,22 +140,27 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(\App\Http\Requests\PostRequest $request, $id)
     {
         //atlikti validacija
 
-        $request->validate([
-            'name' => 'required|min:5',
-            'content' => 'required|min:10'
-        ]);
+//        $request->validate([
+//            'name' => 'required|min:5',
+//            'content' => 'required|min:10'
+//        ]);
 
         // jeigu validacija sėkminga, išsaugau įrašą
 
-        DB::table('posts')->where('id', $id)->update([
-            'name' => $request->input('name'),
-            'content' => $request->input('content')
-        ]);
+//        DB::table('posts')->where('id', $id)->update([
+//            'name' => $request->input('name'),
+//            'content' => $request->input('content'),
+//            'updated_at' => Carbon::now()
+//        ]);
 
+        $post = \App\Post::find($id);
+        $post->name = $request->input('name');
+        $post->content = $request->input('content');
+        $post->save();
 
         // darau redirectą po išsaugojimo
 
@@ -153,7 +177,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('posts')->delete($id);
+//        DB::table('posts')->delete($id);
+
+        \App\Post::destroy($id);
 
         $message = 'Įrašas sėkmingai ištrintas!';
 

@@ -7,15 +7,9 @@
     <div class="container mt-5">
 
         <div class="row mb-4">
-            <div class="col d-flex justify-content-between">
-
-                <h1>Edit blog post {{ $post->id }}</h1>
-
-                <form action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+            <div class="col">
+                <span>Post ID: {{ $post->id }}</span>
+                <h1>Edit blog post</h1>
 
             </div>
         </div>
@@ -29,13 +23,13 @@
 
                     @method('PUT')
 
-                    @input(['label' => 'Title', 'name' => 'name', 'value' => $post->name])
-
-                    @textarea(['label' => 'Content', 'name' => 'content', 'value' => $post->content])
+                    @include('posts.form')
 
                     @include('components.form.submit')
 
                 </form>
+
+                @delete(['action' => route('posts.destroy', ['id' => $post->id])])
 
             </div>
         </div>

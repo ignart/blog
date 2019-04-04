@@ -21,9 +21,7 @@
 
                     @csrf
 
-                    @input(['label' => 'Title', 'name' => 'name'])
-
-                    @textarea(['label' => 'Content', 'name' => 'content'])
+                    @include('posts.form')
 
                     @include('components.form.submit')
 
