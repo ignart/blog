@@ -18,12 +18,7 @@
                                 <h1>{{ $file->file_name }}</h1>
                             </div>
                             <div class="col d-flex justify-content-end">
-                                <a class="btn btn-secondary mr-2" href="#">Edit</a>
-                                <form action="{{ route('file.destroy', ['id' => $file->id]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                @delete(['action' => route('file.destroy', ['id' => $file->id])])
                             </div>
 
                         </div>

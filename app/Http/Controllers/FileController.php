@@ -14,8 +14,7 @@ class FileController extends Controller
      */
     public function index()
     {
-
-        $files = DB::table('files')->get();
+        $files = \App\File::all();
 
         return view('file.index',compact('files'));
     }
@@ -27,6 +26,9 @@ class FileController extends Controller
      */
     public function create()
     {
+
+        $file = new \App\File;
+
         return view('file.create');
     }
 
@@ -36,18 +38,13 @@ class FileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\FileRequest $request)
     {
 
-        $request->validate([
-            'file_name' => 'required',
-            'file_size' => 'required'
-        ]);
-
-        DB::table('files')->insert([
-            'file_name' => $request->input('file_name'),
-            'file_size' => $request->input('file_size')
-        ]);
+        $file = new \App\File;
+        $file->file_name = $request->input('file_name');
+        $file->file_size = $request->input('file_size');
+        $file->save();
 
         $message = 'Failas pridėtas';
 
@@ -63,7 +60,9 @@ class FileController extends Controller
      */
     public function show($id)
     {
-        $file = DB::table('files')->where('id', $id)->first();
+//        $file = DB::table('files')->where('id', $id)->first();
+
+        $file = \App\File::findOrFail($id);
 
         return view('file.show', compact('file'));
     }
