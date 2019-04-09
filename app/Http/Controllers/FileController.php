@@ -75,7 +75,9 @@ class FileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $file = \App\File::find($id);
+
+        return view('file.edit', compact('file'));
     }
 
     /**
@@ -85,9 +87,16 @@ class FileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(\App\Http\Requests\FileRequest $request, $id)
     {
-        //
+        $file = \App\File::find($id);
+        $file->file_name = $request->input('file_name');
+        $file->file_size = $request->input('file_size');
+        $file->save();
+
+        $message = 'Failas sėkmingai atnaujintas!';
+
+        return redirect()->route('file.show', ['id' => $id])->with('message', $message);
     }
 
     /**
