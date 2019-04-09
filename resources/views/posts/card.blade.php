@@ -1,6 +1,6 @@
 <div class="col-lg-3 mb-4">
 
-    <div class="card">
+    <div class="card h-100">
 
         <div class="card-header d-flex flex-column">
 

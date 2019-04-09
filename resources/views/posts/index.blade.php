@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_old')
 
 @section('title')
 
@@ -13,7 +13,7 @@
         <div class="row">
 
         <div class="col d-flex justify-content-between align-items-center mb-4">
-            <h1>Blog posts {{ $posts->count() }}</h1>
+            <h1>Blog posts {{ $posts->total() }}</h1>
             <a class="btn btn-secondary" href="{{ route('posts.create') }}">Add new post</a>
         </div>
 
@@ -23,6 +23,12 @@
 
            @each('posts.card', $posts, 'post', 'posts.no-records')
 
+        </div>
+
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                {{ $posts->links() }}
+            </div>
         </div>
 
     </div>

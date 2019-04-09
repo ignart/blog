@@ -43,7 +43,7 @@ class PostController extends Controller
 
 //        $posts = DB::table('posts')->get();
 
-        $posts = \App\Post::all();
+        $posts = \App\Post::paginate(8);
 
         return view('posts.index',compact('posts'));
     }
