@@ -17,6 +17,18 @@ Route::get('/', function () {
 
 Route::view('about', 'about');
 
+Route::get('error/{code}', function ($code){
+    abort($code);
+});
+
+Route::get('mail-template', function (){
+    $post = \App\Post::orderBy('created_at', 'DESC')->first();
+
+//    Mail::to()->send(new \App\Mail\PostPublished($post));
+
+    return new \App\Mail\PostPublished($post);
+});
+
 Route::get('contact', 'ContactController@index')->name('contact');
 
 Route::get('posts', 'PostController@index')->name('posts.index');
