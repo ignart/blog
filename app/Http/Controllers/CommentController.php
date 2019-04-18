@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -35,7 +36,20 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // TODO pasidaryti validciją
+
+        $post = Post::find($request->input('post'));
+
+//        $comment = new Comment(); // SUPAPRASTINTI
+//        $comment->author = $request->input('author');
+//        $comment->email = $request->input('email');
+//        $comment->content = $request->input('content');
+
+        $comment = Comment::make($request->only(['author', 'email', 'content']));
+
+        $post->comments()->save($comment);
+
+        return redirect()->route('posts.show', $post);
     }
 
     /**

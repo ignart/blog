@@ -15,6 +15,12 @@
 
         </div>
 
+        <div class="card-footer">
+
+        Comments {{ $post->comments_count }}
+
+        </div>
+
     </div>
 
 </div>
