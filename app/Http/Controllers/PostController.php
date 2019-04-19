@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -57,7 +58,9 @@ class PostController extends Controller
     {
         $post = new \App\Post;
 
-        return view('posts.create', compact('post'));
+        $categories = \App\Category::all();
+
+        return view('posts.create', compact('post', 'categories'));
     }
 
     /**
@@ -88,6 +91,9 @@ class PostController extends Controller
         $post->name = $request->input('name');
         $post->content = $request->input('content');
         $post->save();
+
+
+        $post->categories()->attach($request->categories);
 
         // darau redirectą po išsaugojimo
 

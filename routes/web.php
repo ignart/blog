@@ -40,8 +40,11 @@ Route::put('posts/{id}', 'PostController@update')->name('posts.update');
 Route::delete('posts/{id}', 'PostController@destroy')->name('posts.destroy');
 
 Route::post('duplicate-post', 'DuplicatePost')->name('posts.duplicate');
+Route::post('restore-post', 'RestorePost')->name('posts.restore');
 
 Route::get('top-posts', 'ShowTopPosts')->name('posts.top');
+Route::get('recent-posts', 'ShowRecentPosts')->name('posts.recent');
+Route::get('deleted-posts', 'ShowDeletedPosts')->name('posts.deleted');
 
 Route::get('file', 'FileController@index')->name('file.index');
 Route::get('file/create', 'FileController@create')->name('file.create');
