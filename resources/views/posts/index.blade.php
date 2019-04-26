@@ -14,7 +14,9 @@
 
         <div class="col d-flex justify-content-between align-items-center mb-4">
             <h1>Blog posts {{ $posts->total() }}</h1>
+            @auth
             <a class="btn btn-secondary" href="{{ route('posts.create') }}">Add new post</a>
+            @endauth
         </div>
 
         </div>

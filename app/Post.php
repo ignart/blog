@@ -27,8 +27,14 @@ class Post extends Model
     {
         return $query->where('created_at', '>', Carbon::now()->subDay());
     }
+
     public function scopeCreatedLaterThan($query, $dateTime)
     {
         return $query->where('created_at', '>', $dateTime);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

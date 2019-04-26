@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
@@ -14,6 +15,15 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class,'post');
+
+        dd(Auth::user());
+    }
+
     public function index()
     {
 //        $posts = collect([
@@ -57,7 +67,6 @@ class PostController extends Controller
     public function create()
     {
         $post = new \App\Post;
-
         $categories = \App\Category::all();
 
         return view('posts.create', compact('post', 'categories'));
@@ -87,11 +96,13 @@ class PostController extends Controller
 //            'created_at' => Carbon::now()
 //        ]);
 
+
         $post = new \App\Post;
         $post->name = $request->input('name');
         $post->content = $request->input('content');
-        $post->save();
+//        $post->save();
 
+        Auth::user()->posts()->save($post);
 
         $post->categories()->attach($request->categories);
 
@@ -109,7 +120,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(\App\Post $post)
     {
 
 //        Iš DB pagauna
@@ -118,7 +129,7 @@ class PostController extends Controller
 
 //        Iš modelio pagauna
 
-        $post = \App\Post::findOrFail($id);
+//        $post = \App\Post::findOrFail($id);
 
         return view('posts.show', compact('post'));
     }
@@ -129,12 +140,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(\App\Post $post)
     {
 
 //        $post = DB::table('posts')->where('id', $id)->first();
 
-        $post = \App\Post::find($id);
+//        $post = \App\Post::find($id);
+
+//        $this->authorize('update', $post);
 
         return view('posts.edit', compact('post'));
     }
@@ -146,7 +159,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(\App\Http\Requests\PostRequest $request, $id)
+    public function update(\App\Http\Requests\PostRequest $request, \App\Post $post)
     {
         //atlikti validacija
 
@@ -163,7 +176,10 @@ class PostController extends Controller
 //            'updated_at' => Carbon::now()
 //        ]);
 
-        $post = \App\Post::find($id);
+//        $post = \App\Post::find($id);
+
+//        $this->authorize('update', $post);
+
         $post->name = $request->input('name');
         $post->content = $request->input('content');
         $post->save();
@@ -172,7 +188,7 @@ class PostController extends Controller
 
         $message = 'Įrašas sėkmingai atnaujintas!';
 
-        return redirect()->route('posts.show', ['id' => $id])->with('message', $message);
+        return redirect()->route('posts.show', ['id' => $post])->with('message', $message);
     }
 
     /**
@@ -181,11 +197,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(\App\Post $post)
     {
 //        DB::table('posts')->delete($id);
 
-        \App\Post::destroy($id);
+//        $post = \App\Post::find($id);
+
+//        $this->authorize('delete', $post);
+
+        $this->delete();
+
+//        \App\Post::destroy($id);
 
         $message = 'Įrašas sėkmingai ištrintas!';
 

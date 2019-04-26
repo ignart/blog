@@ -31,20 +31,27 @@ Route::get('mail-template', function (){
 
 Route::get('contact', 'ContactController@index')->name('contact');
 
+Route::middleware('auth')->group(function () {
+
+    Route::get('posts/create', 'PostController@create')->name('posts.create');
+    Route::post('posts', 'PostController@store')->name('posts.store');
+    Route::get('posts/{post}/edit', 'PostController@edit')->name('posts.edit');
+    Route::put('posts/{post}', 'PostController@update')->name('posts.update');
+    Route::delete('posts/{post}', 'PostController@destroy')->name('posts.destroy');
+
+    Route::post('duplicate-post', 'DuplicatePost')->name('posts.duplicate');
+    Route::post('restore-post', 'RestorePost')->name('posts.restore');
+
+    Route::get('top-posts', 'ShowTopPosts')->name('posts.top');
+    Route::get('recent-posts', 'ShowRecentPosts')->name('posts.recent');
+    Route::get('deleted-posts', 'ShowDeletedPosts')->name('posts.deleted');
+
+});
+
 Route::get('posts', 'PostController@index')->name('posts.index');
-Route::get('posts/create', 'PostController@create')->name('posts.create');
-Route::get('posts/{id}', 'PostController@show')->name('posts.show');
-Route::post('posts', 'PostController@store')->name('posts.store');
-Route::get('posts/{id}/edit', 'PostController@edit')->name('posts.edit');
-Route::put('posts/{id}', 'PostController@update')->name('posts.update');
-Route::delete('posts/{id}', 'PostController@destroy')->name('posts.destroy');
+Route::get('posts/{post}', 'PostController@show')->name('posts.show');
+Route::resource('comments', 'CommentController');
 
-Route::post('duplicate-post', 'DuplicatePost')->name('posts.duplicate');
-Route::post('restore-post', 'RestorePost')->name('posts.restore');
-
-Route::get('top-posts', 'ShowTopPosts')->name('posts.top');
-Route::get('recent-posts', 'ShowRecentPosts')->name('posts.recent');
-Route::get('deleted-posts', 'ShowDeletedPosts')->name('posts.deleted');
 
 Route::get('file', 'FileController@index')->name('file.index');
 Route::get('file/create', 'FileController@create')->name('file.create');
@@ -54,7 +61,6 @@ Route::get('file/{id}/edit', 'FileController@edit')->name('file.edit');
 Route::put('file/{id}', 'FileController@update')->name('file.update');
 Route::delete('file/{id}', 'FileController@destroy')->name('file.destroy');
 
-Route::resource('comments', 'CommentController');
 
 
 Auth::routes();

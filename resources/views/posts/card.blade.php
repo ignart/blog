@@ -34,7 +34,7 @@
 
         <div class="card-footer">
 
-            <p>Kategorijos
+            <p class="mb-0">Kategorijos
 
                 @foreach ($post->categories as $category)
                     <span class="badge badge-info badge-pill mr-1">{{ $category->name }}</span>
@@ -42,7 +42,9 @@
 
             </p>
 
-        Comments {{ $post->comments_count }}
+            <span class="d-block">Comments {{ $post->comments_count }}</span>
+
+            <span>Autorius: {{ $post->user ? $post->user->name : 'Nėra' }}</span>
 
         </div>
 
