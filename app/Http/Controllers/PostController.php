@@ -19,9 +19,8 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->authorizeResource(Post::class,'post');
+//        $this->authorizeResource(Post::class,'post');
 
-        dd(Auth::user());
     }
 
     public function index()
@@ -205,11 +204,16 @@ class PostController extends Controller
 
 //        $this->authorize('delete', $post);
 
-        $this->delete();
-
-//        \App\Post::destroy($id);
+        $post->delete();
 
         $message = 'Įrašas sėkmingai ištrintas!';
+
+        // VUE componento ⬇️
+
+        if(request()->expectsJson()){
+            request()->session()->flash('message', $message);
+            return response()->json([]);
+        }
 
         return redirect()->route('posts.index')->with('message', $message);
 

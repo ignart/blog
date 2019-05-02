@@ -8,14 +8,14 @@
         <div class="row">
             <div class="col-12 mb-3">
                 @auth
-                    @can('update', $post)
+                    {{--@can('update', $post)--}}
                 <a href="{{ route('posts.edit', ['id' => $post->id ]) }}" class="btn btn-secondary">Edit</a>
                 <form action="{{ route('posts.duplicate') }}" method="POST">
                     @csrf
                     <input type="hidden" name="id" value="{{ $post->id }}">
                     <button type="submit" class="btn btn-success">Klonuoti</button>
                 </form>
-                        @endcan
+                        {{--@endcan--}}
                 @endauth
             </div>
         @include('posts.card', ['posts' => $post])

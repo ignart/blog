@@ -31,6 +31,8 @@
 
                 @delete(['action' => route('posts.destroy', ['id' => $post->id])])
 
+                <delete-button-component post-id="{{ $post->id }}"></delete-button-component>
+
             </div>
         </div>
 

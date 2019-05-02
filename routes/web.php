@@ -61,7 +61,7 @@ Route::get('file/{id}/edit', 'FileController@edit')->name('file.edit');
 Route::put('file/{id}', 'FileController@update')->name('file.update');
 Route::delete('file/{id}', 'FileController@destroy')->name('file.destroy');
 
-
+Route::view('numbers', 'numbers');
 
 Auth::routes();
 
