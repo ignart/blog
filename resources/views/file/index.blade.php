@@ -39,6 +39,16 @@
 
         </div>
 
+        <div class="row my-4">
+
+            <div class="col d-flex justify-content-center">
+
+            {{ $files->links() }}
+
+            </div>
+
+        </div>
+
     </div>
 
 @endsection

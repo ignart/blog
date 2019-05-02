@@ -14,7 +14,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        $files = \App\File::all();
+        $files = \App\File::paginate(10);
 
         return view('file.index',compact('files'));
     }
